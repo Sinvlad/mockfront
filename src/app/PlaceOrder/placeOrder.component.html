@@ -1,0 +1,30 @@
+
+<div class="container">
+    <mat-dialog-content>
+    <form [formGroup]="form" (submit)="close()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" formControlName="name" [(ngModel)]="order.name">
+        </div>
+    <div>
+        <div *ngFor="let item of items">
+                <input  
+                type="checkbox" 
+                (change)="onChange(item, $event.target.checked)"/>
+                <label tooltip="item.desc">{{item.name}}</label>
+                <label>{{item.price}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ddown">Select Table:</label>
+        <select name="ddown" formControlName="tableSelected" class="form-control">
+            <option disabled>Select Table</option>
+            <option *ngFor="let table of tables" value="table">Table{{table}}</option>
+        </select>
+    </div>
+</form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+<button type="submit" [disabled]="!itemchecked && !form.valid">Order Now</button>
+</mat-dialog-actions>    
+</div>
